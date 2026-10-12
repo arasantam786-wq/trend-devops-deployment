@@ -1,0 +1,9 @@
+.git
+node_modules
+*.log
+*.pem
+.terraform
+*.tfstate
+*.tfstate.*
+.env
+.env.*
