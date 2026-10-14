@@ -53,6 +53,28 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to EKS') {
+            steps {
+                sh '''
+                    set -eu
+                    export KUBECONFIG="$(mktemp)"
+                    trap 'rm -f "$KUBECONFIG"' EXIT
+
+                    aws eks update-kubeconfig                       --name trend-eks --region us-east-1
+
+                    kubectl apply -f k8s/service.yaml
+
+                    kubectl set image                       -f k8s/deployment.yaml                       trend-app="$IMAGE_REPO:$IMAGE_TAG"                       --local -o yaml |
+                      kubectl apply -f -
+
+                    kubectl rollout status                       deployment/trend-app -n trend --timeout=300s
+
+                    kubectl get pods -n trend -o wide
+                    kubectl get service trend-app -n trend
+                '''
+            }
+        }
+
     }
 
     post {
