@@ -3,11 +3,20 @@ kind: Service
 metadata:
   name: trend-app
   namespace: trend
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-protocol: HTTP
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-path: /
+    service.beta.kubernetes.io/aws-load-balancer-attributes: load_balancing.cross_zone.enabled=true
 spec:
-  type: ClusterIP
+  type: LoadBalancer
+  loadBalancerClass: service.k8s.aws/nlb
+  allocateLoadBalancerNodePorts: false
   selector:
     app: trend-app
   ports:
     - name: http
       port: 3000
       targetPort: http
+      protocol: TCP

@@ -1,0 +1,15 @@
+clusterName: trend-eks
+region: us-east-1
+vpcId: vpc-072de7d056411c1ae
+replicaCount: 2
+
+image:
+  tag: v2.14.1
+
+serviceAccount:
+  create: false
+  name: aws-load-balancer-controller
+
+featureGates:
+  ALBGatewayAPI: false
+  NLBGatewayAPI: false
