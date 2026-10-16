@@ -351,3 +351,25 @@ before production use:
 
 Monitoring currently uses temporary storage and 24-hour metric
 retention. Grafana data is not persistent. Alertmanager is disabled.
+
+## Deployment screenshot gallery
+
+### Jenkins pipeline
+![Jenkins pipeline](<docs/screenshots/Jenkins pipeline.png>)
+
+### Kubernetes deployment
+![Kubernetes deployment](<docs/screenshots/Kubectl Deploy.png>)
+
+### Application
+![Application](<docs/screenshots/webpage 2.png>)
+
+### Grafana monitoring
+![Grafana monitoring](<docs/screenshots/Grafana.png>)
+
+### Load balancer
+![Load balancer](<docs/screenshots/EKS loadbalancer.png>)
+
+### DockerHub repository
+![DockerHub repository](<docs/screenshots/Doc repository.png>)
+
+[Browse all screenshots](docs/screenshots/)
